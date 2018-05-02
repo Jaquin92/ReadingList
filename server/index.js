@@ -1,13 +1,19 @@
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema")
+const mongoose = require("mongoose")
+require("dotenv").config();
 
 
 const app = express();
+
+mongoose.connect("mongodb://" + process.env.USERNAME + ":" + process.env.PASSWORD + "@ds211440.mlab.com:11440/r-list")
+
+mongoose.connection.once('open', () => console.log("connected to mongoDB"))
 
 app.use("/graphql", graphqlHTTP({
     schema,
     graphiql: true
 }));
 
-app.listen(3005, () => console.log("Listening for requests on 3005"));
+app.listen(3005, () => console.log("LISTENING 3005"));
