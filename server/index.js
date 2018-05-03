@@ -3,9 +3,14 @@ const graphqlHTTP = require("express-graphql");
 const schema = require("./schema/schema")
 const mongoose = require("mongoose")
 require("dotenv").config();
+const cors = require("cors");
 
 
 const app = express();
+
+// allow cross-origin requests
+
+app.use(cors());
 
 mongoose.connect("mongodb://" + process.env.USERNAME + ":" + process.env.PASSWORD + "@ds211440.mlab.com:11440/r-list")
 
